@@ -20,11 +20,11 @@ class NormalLevel(models.Model):
     ]
 
     levelid = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    publisher = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, blank=True)
+    publisher = models.CharField(max_length=255, blank=True)
     ranking = models.PositiveIntegerField(default=0)
-    difficulty = models.CharField(max_length=255, choices=DIFFICULTIES)
-    duration = models.CharField(max_length=255, choices=DURATIONS)
+    difficulty = models.CharField(max_length=255, choices=DIFFICULTIES, blank=True)
+    duration = models.CharField(max_length=255, choices=DURATIONS, blank=True)
     youtube_link = models.URLField(blank=True)
     youtube_thumbnail = models.URLField(blank=True)
     points = models.FloatField(default=0)

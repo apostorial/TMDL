@@ -1,20 +1,18 @@
 from django.contrib import admin
 from adminsortable2.admin import SortableAdminMixin
 from normaldemonlist.models.normallevel import NormalLevel
-import math
+import math, gd, asyncio
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
+from pytube import YouTube
 
 # Register your models here.
 
 class CustomSortableAdminMixin(SortableAdminMixin):
     def _update_order(self, updated_items, extra_model_filters):
-        # Call the super to perform the update
         super()._update_order(updated_items, extra_model_filters)
         for item in updated_items:
-            print(item)
             level = NormalLevel.objects.get(pk=item[0])
-            print(level)
             level.save()
             for level_record in level.normallevelrecord_set.all():
                 level_record.save()
@@ -24,6 +22,28 @@ class NormalLevelAdmin(CustomSortableAdminMixin, admin.ModelAdmin):
     search_fields = ['name', 'levelid']
     ordering = ['ranking']
     actions = ['save_all']
+
+    def save_model(self, request, obj, form, change):
+        level_id = form.cleaned_data.get('levelid')
+        youtube_link = form.cleaned_data.get('youtube_link')
+
+        if level_id:
+            try:
+                level_data = asyncio.run(gd.Client().get_level(level_id))
+                
+                obj.name = level_data.name
+                obj.publisher = level_data.creator.name
+                if level_data.length.name != "XL":
+                    obj.duration = level_data.length.name.capitalize()
+                else:
+                    obj.duration = level_data.length.name
+                obj.difficulty = level_data.difficulty.name.replace('_', ' ').title()
+                obj.youtube_thumbnail = YouTube(youtube_link).thumbnail_url
+            
+            except Exception as e:
+                print(f"Error fetching level data: {e}")
+
+        super().save_model(request, obj, form, change)
 
     def save_all(self, request, queryset):
         for obj in queryset:
