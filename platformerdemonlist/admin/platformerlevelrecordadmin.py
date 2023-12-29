@@ -4,6 +4,7 @@ from platformerdemonlist.models.platformerlevelrecord import PlatformerLevelReco
 # Register your models here.
 
 class PlatformerLevelRecordAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['player', 'level']
+    search_fields = ['player__name', 'level__name']
 
 admin.site.register(PlatformerLevelRecord, PlatformerLevelRecordAdmin)
