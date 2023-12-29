@@ -7,7 +7,7 @@ class NormalRegion(models.Model):
     def calculate_points(self):
         total_points = 0
 
-        for player in self.player_set.all():
+        for player in self.normalplayer_set.all():
             total_points += player.points
 
         self.points = total_points

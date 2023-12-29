@@ -1,1 +1,5 @@
 from normaldemonlist.admin.normalleveladmin import CustomSortableAdminMixin, NormalLevelAdmin
+from normaldemonlist.admin.normalplayeradmin import NormalPlayerAdmin
+from normaldemonlist.admin.normallevelrecordadmin import NormalLevelRecordAdmin
+from normaldemonlist.admin.normalregionadmin import NormalRegionAdmin
+from normaldemonlist.admin.normallistchangeadmin import NormalListChangeAdmin

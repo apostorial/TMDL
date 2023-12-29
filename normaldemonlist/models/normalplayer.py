@@ -14,8 +14,8 @@ class NormalPlayer(models.Model):
 @receiver(post_save, sender='normaldemonlist.NormalPlayer')
 @receiver(post_save, sender='normaldemonlist.NormalLevelRecord')
 def update_player_points(sender, instance, **kwargs):
-    player_model = apps.get_model('player', 'Player')
-    level_record_model = apps.get_model('levelrecord', 'LevelRecord')
+    player_model = apps.get_model('normaldemonlist', 'NormalPlayer')
+    level_record_model = apps.get_model('normaldemonlist', 'NormalLevelRecord')
     
     if sender == player_model:
         player = instance
@@ -24,7 +24,7 @@ def update_player_points(sender, instance, **kwargs):
     
     total_points = 0
 
-    for level_record in player.levelrecord_set.all():
+    for level_record in player.normallevelrecord_set.all():
         level = level_record.level
         record_percentage = level_record.record_percentage
 
