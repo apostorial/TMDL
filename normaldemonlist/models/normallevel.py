@@ -64,7 +64,12 @@ def create_level_record(sender, instance, created, **kwargs):
     from normaldemonlist.models.normallevelrecord import NormalLevelRecord
     if created and instance.first_victor:
         player = instance.first_victor
-        level_record = NormalLevelRecord.objects.create(player=player, level=instance, record_percentage=100)
+        if instance.youtube_link:
+            record_video_link = instance.youtube_link
+            level_record = NormalLevelRecord.objects.create(player=player, level=instance, record_percentage=100, record_video_link=record_video_link)
+        else:
+            print(instance.youtube_link)
+            level_record = NormalLevelRecord.objects.create(player=player, level=instance, record_percentage=100)
 
 @receiver(post_save, sender=NormalLevel)
 def update_min_completion(sender, instance, **kwargs):
