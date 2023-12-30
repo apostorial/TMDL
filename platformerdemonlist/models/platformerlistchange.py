@@ -40,6 +40,10 @@ class PlatformerListChange(models.Model):
     custom_abovelevelname = models.CharField(max_length=100, blank=True, null=True)
     custom_belowlevelname = models.CharField(max_length=100, blank=True, null=True)
 
+    class Meta:
+        verbose_name = "Platformer List Change"
+        verbose_name_plural = "Platformer List Changes"
+
 @receiver(pre_save, sender=PlatformerListChange)
 def populate_description(sender, instance, **kwargs):
     if instance.level:

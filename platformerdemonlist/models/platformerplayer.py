@@ -7,6 +7,10 @@ class PlatformerPlayer(models.Model):
     name = models.CharField(max_length=255)
     points = models.FloatField(default=0)
     region = models.ForeignKey('platformerdemonlist.PlatformerRegion', on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name = "Platformer Player"
+        verbose_name_plural = "Platformer Players"
     
     def __str__(self):
         return f"{self.name} - {round(self.points, 2)} points"

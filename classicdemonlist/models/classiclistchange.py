@@ -40,6 +40,10 @@ class ClassicListChange(models.Model):
     custom_abovelevelname = models.CharField(max_length=100, blank=True, null=True)
     custom_belowlevelname = models.CharField(max_length=100, blank=True, null=True)
 
+    class Meta:
+        verbose_name = "Classic List Change"
+        verbose_name_plural = "Classic List Changes"
+
 @receiver(pre_save, sender=ClassicListChange)
 def populate_description(sender, instance, **kwargs):
     if instance.level:

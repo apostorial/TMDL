@@ -38,6 +38,10 @@ class ClassicLevelRecord(models.Model):
         super(ClassicLevelRecord, self).save(*args, **kwargs)
         self.update_player_points()
 
+    class Meta:
+        verbose_name = "Classic Level Record"
+        verbose_name_plural = "Classic Level Records"
+
     def __str__(self):
         return f"{self.player.name} - {self.level.name} ({self.record_percentage}%)"
     

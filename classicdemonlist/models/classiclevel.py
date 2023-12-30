@@ -41,6 +41,10 @@ class ClassicLevel(models.Model):
             self.min_points = None
 
         super(ClassicLevel, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "Classic Level"
+        verbose_name_plural = "Classic Levels"
   
     def __str__(self):
         return f"{self.levelid} - {self.name}"

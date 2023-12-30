@@ -31,6 +31,8 @@ class PlatformerLevel(models.Model):
 
     class Meta:
         ordering = ['name', 'points']
+        verbose_name = "Platformer Level"
+        verbose_name_plural = "Platformer Levels"
   
     def __str__(self):
         return f"{self.levelid} - {self.name}"

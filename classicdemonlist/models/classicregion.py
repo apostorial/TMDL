@@ -13,6 +13,10 @@ class ClassicRegion(models.Model):
         self.points = total_points
         self.save(update_fields=['points'])
         return total_points
+    
+    class Meta:
+        verbose_name = "Classic Region"
+        verbose_name_plural = "Classic Regions"
 
     def __str__(self):
         return f"{self.name} - {round(self.points, 2)} points"

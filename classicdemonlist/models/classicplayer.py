@@ -7,6 +7,10 @@ class ClassicPlayer(models.Model):
     name = models.CharField(max_length=255)
     points = models.FloatField(default=0)
     region = models.ForeignKey('classicdemonlist.ClassicRegion', on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name = "Classic Player"
+        verbose_name_plural = "Classic Players"
     
     def __str__(self):
         return f"{self.name} - {round(self.points, 2)} points"

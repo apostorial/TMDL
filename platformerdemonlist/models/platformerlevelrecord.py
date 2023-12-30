@@ -12,9 +12,6 @@ class PlatformerLevelRecord(models.Model):
     record_time = models.DurationField(default=timedelta(minutes=30))
     record_video_link = models.URLField(blank=True)
 
-    class Meta:
-        unique_together = ['level', 'player']
-
     def update_player_points(self):
         level = self.level
         player = self.player
@@ -32,6 +29,10 @@ class PlatformerLevelRecord(models.Model):
 
         super(PlatformerLevelRecord, self).save(*args, **kwargs)
         self.update_player_points()
+
+    class Meta:
+        verbose_name = "Platformer Level Record"
+        verbose_name_plural = "Platformer Level Records"
 
     def __str__(self):
         return f"{self.player.name} - {self.level.name} ({self.record_time})"
