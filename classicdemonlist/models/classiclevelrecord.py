@@ -1,14 +1,14 @@
 from django.db import models
-from normaldemonlist.models.normalplayer import NormalPlayer
-from normaldemonlist.models.normallevel import NormalLevel
+from classicdemonlist.models.classicplayer import ClassicPlayer
+from classicdemonlist.models.classiclevel import ClassicLevel
 import math
 from django.core.validators import MaxValueValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-class NormalLevelRecord(models.Model):
-    player = models.ForeignKey(NormalPlayer, on_delete=models.CASCADE)
-    level = models.ForeignKey(NormalLevel, on_delete=models.CASCADE, null=True)
+class ClassicLevelRecord(models.Model):
+    player = models.ForeignKey(ClassicPlayer, on_delete=models.CASCADE)
+    level = models.ForeignKey(ClassicLevel, on_delete=models.CASCADE, null=True)
     record_percentage = models.PositiveIntegerField(default=0, validators=[MaxValueValidator(100)])
     record_video_link = models.URLField(blank=True)
 
@@ -35,12 +35,12 @@ class NormalLevelRecord(models.Model):
                 self.level.first_victor = self.player
                 self.level.save()
 
-        super(NormalLevelRecord, self).save(*args, **kwargs)
+        super(ClassicLevelRecord, self).save(*args, **kwargs)
         self.update_player_points()
 
     def __str__(self):
         return f"{self.player.name} - {self.level.name} ({self.record_percentage}%)"
     
-@receiver(post_save, sender=NormalLevelRecord)
+@receiver(post_save, sender=ClassicLevelRecord)
 def update_player_points_signal(sender, instance, **kwargs):
     instance.update_player_points()

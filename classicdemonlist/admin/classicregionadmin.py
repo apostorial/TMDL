@@ -1,11 +1,11 @@
 from django.contrib import admin
-from normaldemonlist.models.normalplayer import NormalPlayer
+from classicdemonlist.models.classicregion import ClassicRegion
 
 # Register your models here.
 
-class NormalPlayerAdmin(admin.ModelAdmin):
-    list_display = ['name', 'rounded_points', 'region']
-    search_fields = ['name', 'region__name']
+class ClassicRegionAdmin(admin.ModelAdmin):
+    list_display = ['name', 'rounded_points']
+    search_fields = ['name']
 
     def rounded_points(self, obj):
         return round(obj.points, 2)
@@ -15,4 +15,4 @@ class NormalPlayerAdmin(admin.ModelAdmin):
             self.exclude = ['points']
             return super().add_view(request, form_url, extra_context)
 
-admin.site.register(NormalPlayer, NormalPlayerAdmin)
+admin.site.register(ClassicRegion, ClassicRegionAdmin)

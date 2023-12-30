@@ -1,9 +1,9 @@
 from django.contrib import admin
-from normaldemonlist.models.normallistchange import NormalListChange
+from classicdemonlist.models.classiclistchange import ClassicListChange
 
 # Register your models here.
 
-class NormalListChangeAdmin(admin.ModelAdmin):
+class ClassicListChangeAdmin(admin.ModelAdmin):
     list_display = ['date', 'level', 'description', 'effect']
     search_fields = ['date', 'level']
 
@@ -11,4 +11,4 @@ class NormalListChangeAdmin(admin.ModelAdmin):
             self.exclude = ['description']
             return super().add_view(request, form_url, extra_context)
 
-admin.site.register(NormalListChange, NormalListChangeAdmin)
+admin.site.register(ClassicListChange, ClassicListChangeAdmin)

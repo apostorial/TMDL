@@ -1,0 +1,5 @@
+from classicdemonlist.models.classiclevel import ClassicLevel
+from classicdemonlist.models.classicplayer import ClassicPlayer
+from classicdemonlist.models.classicregion import ClassicRegion
+from classicdemonlist.models.classiclevelrecord import ClassicLevelRecord
+from classicdemonlist.models.classiclistchange import ClassicListChange

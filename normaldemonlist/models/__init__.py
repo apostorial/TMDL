@@ -1,5 +1,0 @@
-from normaldemonlist.models.normallevel import NormalLevel
-from normaldemonlist.models.normalplayer import NormalPlayer
-from normaldemonlist.models.normalregion import NormalRegion
-from normaldemonlist.models.normallevelrecord import NormalLevelRecord
-from normaldemonlist.models.normallistchange import NormalListChange

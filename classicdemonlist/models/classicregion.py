@@ -1,13 +1,13 @@
 from django.db import models
 
-class NormalRegion(models.Model):
+class ClassicRegion(models.Model):
     name = models.CharField(max_length=100)
     points = models.FloatField(default=0)
 
     def calculate_points(self):
         total_points = 0
 
-        for player in self.normalplayer_set.all():
+        for player in self.classicplayer_set.all():
             total_points += player.points
 
         self.points = total_points

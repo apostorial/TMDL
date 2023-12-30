@@ -1,6 +1,6 @@
 from django.contrib import admin
 from adminsortable2.admin import SortableAdminMixin
-from normaldemonlist.models.normallevel import NormalLevel
+from classicdemonlist.models.classiclevel import ClassicLevel
 import math, gd, asyncio
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
@@ -12,12 +12,12 @@ class CustomSortableAdminMixin(SortableAdminMixin):
     def _update_order(self, updated_items, extra_model_filters):
         super()._update_order(updated_items, extra_model_filters)
         for item in updated_items:
-            level = NormalLevel.objects.get(pk=item[0])
+            level = ClassicLevel.objects.get(pk=item[0])
             level.save()
-            for level_record in level.normallevelrecord_set.all():
+            for level_record in level.classiclevelrecord_set.all():
                 level_record.save()
 
-class NormalLevelAdmin(CustomSortableAdminMixin, admin.ModelAdmin):
+class ClassicLevelAdmin(CustomSortableAdminMixin, admin.ModelAdmin):
     list_display = ['ranking', 'name', 'points', 'min_points', 'min_completion', 'first_victor']
     search_fields = ['name', 'levelid']
     ordering = ['ranking']
@@ -62,4 +62,4 @@ class NormalLevelAdmin(CustomSortableAdminMixin, admin.ModelAdmin):
             self.exclude = ['points', 'min_points']
             return super().add_view(request, form_url, extra_context)
 
-admin.site.register(NormalLevel, NormalLevelAdmin)
+admin.site.register(ClassicLevel, ClassicLevelAdmin)

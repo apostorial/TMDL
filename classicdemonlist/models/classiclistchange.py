@@ -1,11 +1,11 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
-from normaldemonlist.models.normallevel import NormalLevel
+from classicdemonlist.models.classiclevel import ClassicLevel
 
 # Create your models here.
 
-class NormalListChange(models.Model):
+class ClassicListChange(models.Model):
 
     place = 'Place'
     #move = 'Move'
@@ -25,14 +25,14 @@ class NormalListChange(models.Model):
         ('List requirement', 'List requirement'),
     ]
 
-    level = models.ForeignKey(NormalLevel, on_delete=models.SET_NULL, blank=True, null=True)
-    swap_with = models.ForeignKey(NormalLevel, related_name='swap_with', on_delete=models.SET_NULL, blank=True, null=True)
+    level = models.ForeignKey(ClassicLevel, on_delete=models.SET_NULL, blank=True, null=True)
+    swap_with = models.ForeignKey(ClassicLevel, related_name='swap_with', on_delete=models.SET_NULL, blank=True, null=True)
     date = models.DateField()
     change_type = models.CharField(max_length=255, choices=CHANGE_TYPE, default=None)
     placement = models.PositiveIntegerField(default=0)
     description = models.CharField(max_length=255, blank=True)
-    above_level = models.ForeignKey(NormalLevel, related_name='above_level', on_delete=models.SET_NULL, blank=True, null=True)
-    below_level = models.ForeignKey(NormalLevel, related_name='below_level', on_delete=models.SET_NULL, blank=True, null=True)
+    above_level = models.ForeignKey(ClassicLevel, related_name='above_level', on_delete=models.SET_NULL, blank=True, null=True)
+    below_level = models.ForeignKey(ClassicLevel, related_name='below_level', on_delete=models.SET_NULL, blank=True, null=True)
     effect = models.CharField(max_length=255, blank=True)
 
     custom_levelname = models.CharField(max_length=100, blank=True, null=True)
@@ -40,7 +40,7 @@ class NormalListChange(models.Model):
     custom_abovelevelname = models.CharField(max_length=100, blank=True, null=True)
     custom_belowlevelname = models.CharField(max_length=100, blank=True, null=True)
 
-@receiver(pre_save, sender=NormalListChange)
+@receiver(pre_save, sender=ClassicListChange)
 def populate_description(sender, instance, **kwargs):
     if instance.level:
         level_name = instance.level.name
@@ -59,19 +59,19 @@ def populate_description(sender, instance, **kwargs):
     elif instance.custom_swapwith:
         swapwith_name = instance.customswapwith
 
-    if instance.change_type == NormalListChange.place:
+    if instance.change_type == ClassicListChange.place:
         instance.description = f"{level_name} has been placed at #{instance.placement}"
     #elif instance.change_type == ListChange.move:
         #instance.description = f"{level_name} has been moved to #{instance.placement}"
-    elif instance.change_type == NormalListChange.swap:
+    elif instance.change_type == ClassicListChange.swap:
         instance.description = f"{level_name} has been swapped with #{swapwith_name} at #{instance.placement}"
-    elif instance.change_type == NormalListChange.raise_:
+    elif instance.change_type == ClassicListChange.raise_:
         instance.description = f"{level_name} has been raised to #{instance.placement}"
-    elif instance.change_type == NormalListChange.lower:
+    elif instance.change_type == ClassicListChange.lower:
         instance.description = f"{level_name} has been lowered to #{instance.placement}"
-    elif instance.change_type == NormalListChange.remove:
+    elif instance.change_type == ClassicListChange.remove:
         instance.description = f"{level_name} has been removed"
-    elif instance.change_type == NormalListChange.list_requirement:
+    elif instance.change_type == ClassicListChange.list_requirement:
         instance.description = f"{level_name}'s list requirement has been changed to #{instance.level.min_completion}"
 
     if instance.above_level is not None:
