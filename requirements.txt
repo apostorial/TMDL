@@ -5,3 +5,4 @@ gd==0.1.11
 python-dotenv==1.0.0
 pytube==15.0.0
 gunicorn==21.2.0
+psycopg2==2.9.7
