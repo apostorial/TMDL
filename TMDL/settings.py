@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-import django_heroku
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["tmdl.herokuapp.com"]
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -94,9 +94,9 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     "default": dj_database_url.parse(os.environ.get("DB_URL"))
-# }
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get("DB_URL"))
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
