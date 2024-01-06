@@ -47,7 +47,7 @@ class ClassicLevel(models.Model):
         verbose_name_plural = "Classic Levels"
   
     def __str__(self):
-        return f"{self.levelid} - {self.name}"
+        return f"{self.name} - {self.levelid}"
     
 @receiver(post_save, sender='classicdemonlist.ClassicPlayer')
 @receiver(post_save, sender='classicdemonlist.ClassicLevelRecord')

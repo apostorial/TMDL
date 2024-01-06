@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from classicdemonlist import views
+from classicdemonlist.views import index, classic_extendedlist
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index, name='index'),
+    path('classic_extendedlist/', classic_extendedlist, name='classic_extendedlist'),
 ]
