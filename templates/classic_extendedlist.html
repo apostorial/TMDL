@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Classic Extended List{% endblock %}
+{% block content %}
+  {% for level in classic_extended_levels|dictsort:"ranking" %}
+  <div class="card mt-3 mx-auto" style="width: 780px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ level.youtube_thumbnail }}" class="img-fluid rounded-start" style="width: 100%;">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">#{{ level.ranking }} - {{ level.name }}</h5>
+          <p class="card-text"><strong>Published by:</strong> {{ level.publisher }}</p>
+          <button class="btn btn-primary" data-level-id="{{ level.levelid }}" id="liveToastBtn">Copy Level ID</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          var copyButtons = document.querySelectorAll(".btn");
+  
+          copyButtons.forEach(function (button) {
+              button.addEventListener("click", function () {
+                  var levelId = button.getAttribute("data-level-id");
+                  copyToClipboard(levelId);
+              });
+          });
+      });
+  
+      function copyToClipboard(text) {
+          var textarea = document.createElement("textarea");
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textarea);
+          alert("Level ID copied to clipboard: " + text);
+      }
+  </script>  
+{% endblock %}

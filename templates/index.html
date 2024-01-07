@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Classic Main List{% endblock %}
+{% block content %}
+  {% for level in classic_levels|dictsort:"ranking" %}
+  <div class="card mt-3 mx-auto" style="width: 780px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ level.youtube_thumbnail }}" class="img-fluid rounded-start" style="width: 100%;">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">#{{ level.ranking }} - {{ level.name }}</h5>
+          <p class="card-text"><strong>Published by:</strong> {{ level.publisher }}</p>
+          <button type="button" class="btn btn-primary"  data-bs-placement="right" data-bs-content="Copied to clipboard!" data-bs-toggle="popover" data-bs-container="body" data-level-id="{{ level.levelid }}" id="liveAlertBtn">Copy Level ID</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %} 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl, {
+        delay: { "show": 0, "hide": 2000 } // Set the delay for showing and hiding the popover
+    }));
+
+    var copyButtons = document.querySelectorAll(".btn");
+
+    copyButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            var levelId = button.getAttribute("data-level-id");
+            copyToClipboardAndShowPopover(button, levelId);
+        });
+    });
+});
+
+function copyToClipboard(text) {
+    var textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+}
+
+function copyToClipboardAndShowPopover(element, text) {
+    copyToClipboard(text);
+
+    // Find the popover instance associated with the clicked element
+    const popover = bootstrap.Popover.getInstance(element);
+
+    // Show the popover
+    popover.show();
+
+    // Hide the popover after 2 seconds (adjust duration as needed)
+    setTimeout(() => {
+        popover.hide();
+    }, 2000);
+}
+</script>
+{% endblock %}
