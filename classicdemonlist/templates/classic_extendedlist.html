@@ -42,15 +42,20 @@
       </nav>
 
         {% for level in classic_extended_levels|dictsort:"ranking" %}
-        <div class="card mb-3 mt-3 mx-auto" style="width: 18rem;">
-            <img src="{{ level.youtube_thumbnail }}" class="card-img-top" >
-            <div class="card-body">
-            <h5 class="card-title">#{{ level.ranking }} - {{ level.name }}</h5>
-            <p class="card-text"><strong>Published by:</strong> {{ level.publisher }}</p>
-            <button class="btn btn-primary" data-level-id="{{ level.levelid }}" id="liveToastBtn">Copy Level ID</button>
+        <div class="card mt-3 mx-auto" style="max-width: 780px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{ level.youtube_thumbnail }}" class="img-fluid rounded-start" style="width: 100%;">
             </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">#{{ level.ranking }} - {{ level.name }}</h5>
+                <p class="card-text"><strong>Published by:</strong> {{ level.publisher }}</p>
+                <button class="btn btn-primary" data-level-id="{{ level.levelid }}" id="liveToastBtn">Copy Level ID</button>
+              </div>
+            </div>
+          </div>
         </div>
-        
         {% endfor %}
 
         <script>
