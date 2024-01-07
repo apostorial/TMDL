@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="modal fade" id="modal{{level.levelid}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -38,7 +38,7 @@
         </div>
         <ul>
           {% for record in level.classiclevelrecord_set.all reversed%}
-            <li>{{ record.player.name }} - {{ record.record_percentage }}%</li>
+            <li>{{ record.player.name }} - {{ record.record_percentage }}% - <a href="{{ record.record_video_link }}" target="_blank" style="text-decoration: none;">YouTube</a></li>
           {% endfor %}
         </ul>
       </div>
