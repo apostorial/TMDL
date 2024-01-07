@@ -10,53 +10,72 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">#{{ level.ranking }} - {{ level.name }}</h5>
+          <h5 class="card-title"><a style="text-decoration: none; color: black; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modal{{level.levelid}}">#{{ level.ranking }} - {{ level.name }}</a></h5>
           <p class="card-text"><strong>Published by:</strong> {{ level.publisher }}</p>
           <button type="button" class="btn btn-primary"  data-bs-placement="right" data-bs-content="Copied to clipboard!" data-bs-toggle="popover" data-bs-container="body" data-level-id="{{ level.levelid }}" id="liveAlertBtn">Copy Level ID</button>
         </div>
       </div>
     </div>
   </div>
-{% endfor %} 
+
+  <div class="modal fade" id="modal{{level.levelid}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{ level.name }} details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Level ID:</strong> {{ level.levelid }}</p>
+          <p><strong>Duration:</strong> {{ level.duration }}</p>
+          <p><strong>Publisher:</strong> {{ level.publisher }}</p>
+          <p><strong>Difficulty:</strong> {{ level.get_difficulty_display }}</p>
+          <p><strong>Ranking:</strong> {{ level.ranking }}</p>
+          <p><strong>Points:</strong> {{ level.points }}</p>
+          <p><strong>Min points:</strong> {{ level.min_points }}</p>
+          <p><strong>List percentage:</strong> {{ level.min_completion }}%</p>
+          <h2>Records for {{ level.name }}:</h2>
+        </div>
+        <ul>
+          {% for record in level.classiclevelrecord_set.all reversed%}
+            <li>{{ record.player.name }} - {{ record.record_percentage }}% - <a href="{{ record.record_video_link }}" target="_blank" style="text-decoration: none;">YouTube</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endfor %} 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl, {
-        delay: { "show": 0, "hide": 2000 } // Set the delay for showing and hiding the popover
-    }));
-
-    var copyButtons = document.querySelectorAll(".btn");
-
+  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+  const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl, {
+    delay: { "show": 0, "hide": 2000 }
+  }));
+  var copyButtons = document.querySelectorAll(".btn");
     copyButtons.forEach(function (button) {
         button.addEventListener("click", function () {
-            var levelId = button.getAttribute("data-level-id");
-            copyToClipboardAndShowPopover(button, levelId);
-        });
+          var levelId = button.getAttribute("data-level-id");
+          copyToClipboardAndShowPopover(button, levelId);
+      });
     });
-});
+  });
 
-function copyToClipboard(text) {
+  function copyToClipboard(text) {
     var textarea = document.createElement("textarea");
     textarea.value = text;
     document.body.appendChild(textarea);
     textarea.select();
     document.execCommand("copy");
     document.body.removeChild(textarea);
-}
+  }
 
-function copyToClipboardAndShowPopover(element, text) {
+  function copyToClipboardAndShowPopover(element, text) {
     copyToClipboard(text);
-
-    // Find the popover instance associated with the clicked element
     const popover = bootstrap.Popover.getInstance(element);
-
-    // Show the popover
     popover.show();
-
-    // Hide the popover after 2 seconds (adjust duration as needed)
     setTimeout(() => {
-        popover.hide();
+      popover.hide();
     }, 2000);
-}
+  }
 </script>
 {% endblock %}
