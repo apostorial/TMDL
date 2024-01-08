@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light sticky-top justify-content-center">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"><strong>TMDL.</strong></a>
+          <a class="navbar-brand" href="{% url 'index' %}"><strong>TMDL.</strong></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -23,6 +23,7 @@
                     <li><a class="dropdown-item" href="{% url 'index' %}">Main list</a></li>
                     <li><a class="dropdown-item" href="{% url 'classic_extendedlist' %}">Extended List</a></li>
                     <li><a class="dropdown-item disabled" href="#">Legacy List</a></li>
+                    <li><a class="dropdown-item" href="{% url 'stat_viewer' %}">Stat Viewer</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -33,6 +34,7 @@
                     <li><a class="dropdown-item disabled" href="#">Main list</a></li>
                     <li><a class="dropdown-item disabled" href="#">Extended List</a></li>
                     <li><a class="dropdown-item disabled" href="#">Legacy List</a></li>
+                    <li><a class="dropdown-item disabled" href="{% url 'stat_viewer' %}">Stat Viewer</a></li>
                 </ul>
               </li>
             </ul>
