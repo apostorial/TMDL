@@ -23,5 +23,5 @@ urlpatterns = [
     path('', index, name='index'),
     path('classic_extendedlist/', classic_extendedlist, name='classic_extendedlist'),
     path('classic_legacylist/', classic_legacylist, name='classic_legacylist'),
-    path('stat_viewer/', stat_viewer, name='stat_viewer'),
+    path('classic_stat_viewer/', stat_viewer, name='classic_stat_viewer'),
 ]
