@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </head>
-<body>
+<body class="d-flex flex-column vh-100">
     <nav class="navbar navbar-expand-lg bg-light sticky-top justify-content-center">
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'index' %}"><strong>TMDL.</strong></a>
@@ -37,13 +37,16 @@
                     <li><a class="dropdown-item disabled" href="#">Stat Viewer</a></li>
                 </ul>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'guidelines' %}">Guidelines</a>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
     {% block content %}
     {% endblock %}
-    <footer class="bg-body-tertiary text-center text-lg-start mt-3">
+    <footer class="bg-body-tertiary text-center text-lg-start mt-auto">
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
           Made by <strong><a class="text-body" href="https://github.com/apostorial" target="_blank">Apostorial</a></strong>
           <br>

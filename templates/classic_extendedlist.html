@@ -10,7 +10,7 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title"><a style="text-decoration: none; color: black; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modal{{level.levelid}}">#{{ level.ranking }} - {{ level.name }}</a></h5>
+          <h5 class="card-title text-decoration-none text-black"><a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modal{{level.levelid}}">#{{ level.ranking }} - {{ level.name }}</a></h5>
           <p class="card-text"><strong>Published by:</strong> {{ level.publisher }}</p>
           <button type="button" class="btn btn-primary"  data-bs-placement="right" data-bs-content="Copied to clipboard!" data-bs-toggle="popover" data-bs-container="body" data-level-id="{{ level.levelid }}" id="liveAlertBtn">Copy Level ID</button>
         </div>

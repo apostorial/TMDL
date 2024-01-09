@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import index, classic_extendedlist, classic_legacylist, stat_viewer
+from .views import index, classic_extendedlist, classic_legacylist, stat_viewer, guidelines
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('classic_extendedlist/', classic_extendedlist, name='classic_extendedlist'),
     path('classic_legacylist/', classic_legacylist, name='classic_legacylist'),
     path('classic_stat_viewer/', stat_viewer, name='classic_stat_viewer'),
+    path('guidelines/', guidelines, name='guidelines'),
 ]

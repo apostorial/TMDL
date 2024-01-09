@@ -21,5 +21,7 @@ def stat_viewer(request):
     regions = ClassicRegion.objects.all()
     for region in regions:
         region.players = ClassicPlayer.objects.filter(region=region)
-    
     return render(request, 'stat_viewer.html', {'regions': regions})
+
+def guidelines(request):
+    return render(request, 'guidelines.html')
