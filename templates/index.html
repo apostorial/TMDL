@@ -3,7 +3,7 @@
 {% block title %}Classic Main List{% endblock %}
 {% block content %}
   {% for level in classic_levels|dictsort:"ranking" %}
-  <div class="card mt-3 mx-auto{% if forloop.last %} mb-3{% endif %}" style="width: 780px;">
+  <div class="card mt-3 mx-auto{% if forloop.last %} mb-3{% endif %}" style="width: 780px; max-width: 100%;">
     <div class="row g-0">
       <div class="col-md-4">
         <a href="{{ level.youtube_link }}" target="_blank"><img src="{{ level.youtube_thumbnail }}" class="img-fluid rounded-start" style="width: 100%;"></a>
