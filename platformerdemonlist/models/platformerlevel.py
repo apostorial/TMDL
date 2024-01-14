@@ -6,6 +6,7 @@ from django.dispatch import receiver
 
 class PlatformerLevel(models.Model):
     DIFFICULTIES = [
+        ('Medium Demon', 'Medium Demon'),
         ('Hard Demon', 'Hard Demon'),
         ('Insane Demon', 'Insane Demon'),
         ('Extreme Demon', 'Extreme Demon'),
