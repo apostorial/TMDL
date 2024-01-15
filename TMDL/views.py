@@ -2,6 +2,9 @@ from django.shortcuts import render
 from classicdemonlist.models.classiclevel import ClassicLevel
 from classicdemonlist.models.classicregion import ClassicRegion
 from classicdemonlist.models.classicplayer import ClassicPlayer
+from platformerdemonlist.models.platformerlevel import PlatformerLevel
+from platformerdemonlist.models.platformerregion import PlatformerRegion
+from platformerdemonlist.models.platformerplayer import PlatformerPlayer
 
 # Create your views here.
 
@@ -16,6 +19,10 @@ def classic_extendedlist(request):
 def classic_legacylist(request):
     classic_legacy_levels = ClassicLevel.objects.filter(ranking__gt=150)
     return render(request, 'classic_legacylist.html', {'classic_legacy_levels': classic_legacy_levels})
+
+def platformer_mainlist(request):
+    platformer_levels = PlatformerLevel.objects.filter(ranking__lte=75)
+    return render(request, 'platformer_mainlist.html', {'platformer_levels': platformer_levels})
 
 def stat_viewer(request):
     regions = ClassicRegion.objects.all()
