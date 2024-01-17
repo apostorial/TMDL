@@ -20,15 +20,21 @@ def classic_legacylist(request):
     classic_legacy_levels = ClassicLevel.objects.filter(ranking__gt=150)
     return render(request, 'classic_legacylist.html', {'classic_legacy_levels': classic_legacy_levels})
 
+def classic_stat_viewer(request):
+    regions = ClassicRegion.objects.all()
+    for region in regions:
+        region.players = ClassicPlayer.objects.filter(region=region)
+    return render(request, 'classic_stat_viewer.html', {'regions': regions})
+
 def platformer_mainlist(request):
     platformer_levels = PlatformerLevel.objects.filter(ranking__lte=75)
     return render(request, 'platformer_mainlist.html', {'platformer_levels': platformer_levels})
 
-def stat_viewer(request):
-    regions = ClassicRegion.objects.all()
+def platformer_stat_viewer(request):
+    regions = PlatformerRegion.objects.all()
     for region in regions:
-        region.players = ClassicPlayer.objects.filter(region=region)
-    return render(request, 'stat_viewer.html', {'regions': regions})
+        region.players = PlatformerPlayer.objects.filter(region=region)
+    return render(request, 'platformer_stat_viewer.html', {'regions': regions})
 
 def guidelines(request):
     return render(request, 'guidelines.html')
