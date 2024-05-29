@@ -33,9 +33,12 @@ class ClassicLevel(models.Model):
     first_victor = models.ForeignKey('classicdemonlist.ClassicPlayer', on_delete=models.PROTECT, null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        if self.ranking is not None:
+        if self.ranking is not None and self.ranking <= 150:
             self.points = round(500 * (1 - math.log(self.ranking, 151)), 2)
             self.min_points = round((500 * (1 - math.log(self.ranking, 151))) * 1/3, 2)
+        elif self.ranking is not None and self.ranking > 150:
+            self.points = 0
+            self.min_points = 0
         else:
             self.points = None
             self.min_points = None
